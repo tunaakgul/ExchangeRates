@@ -1,0 +1,36 @@
+<h1>Exchange Rates</h1>
+<div class="row" style="margin-top: 3%;">
+  <div class="col-xl-4 col-lg-4 col-md-4 col-sm-3 col-2">
+
+  </div>
+  <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-8">
+    <div align="center" class="form-group">
+      <select class="form-control" [ngModel]="selectedBaseCurrency" (ngModelChange)="onChangeBaseCurrency($event)"
+        style="margin-top: 3%;">
+        <option [value]="undefined" disabled hidden>Select Base Currency</option>
+        <option *ngFor="let c of currencies">{{c}}</option>
+      </select>
+      <select class="form-control" [ngModel]="selectedQuoteCurrency" (ngModelChange)="onChangeQuoteCurrency($event)"
+        style="margin-top: 3%;">
+        <option [value]="undefined" disabled hidden>Select Quote Currency</option>
+        <option *ngFor="let c of currencies">{{c}}</option>
+      </select>
+
+      <div class="input-group money-input">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="baseAmountCurrencySymbol">{{baseAmountCurrencySymbol}}</span>
+        </div>
+        <input #baseAmountInput type="text" class="form-control" (keypress)="restrictNumeric($event)"
+          (blur)="transformAmount($event)" [(ngModel)]="formattedAmount" placeholder="Enter Base Amount"
+          aria-describedby="baseAmountCurrencySymbol">
+      </div>
+      <div *ngIf="resultSectionVisible">
+        <hr>
+        <label style="margin-top: 3%; display: block; width: 100%;"> Conversion Rate:
+          {{convertAmountResponse.ExchangeRate}} </label>
+        <label> Expected Amount: {{currencyPipe.transform(convertAmountResponse.QuoteAmount, selectedQuoteCurrency,
+          'symbol', '1.2-2')}} </label>
+      </div>
+    </div>
+  </div>
+</div>

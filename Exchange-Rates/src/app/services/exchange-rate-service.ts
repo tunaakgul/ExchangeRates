@@ -8,7 +8,7 @@ import { ConvertAmountRequestModel } from '../models/convert-amount-request-mode
 })
 export class ExchangeRateService {
 
-  apiServiceUrl: string = "https://localhost:5001/api/v1/ExchangeRates/";
+  apiServiceUrl: string = "http://localhost:5000/api/v1/ExchangeRates/";
 
   constructor(private http: HttpClient) {
 
